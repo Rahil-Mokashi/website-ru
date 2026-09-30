@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night: #070b1a;
+  --color-midnight: #0d1533;
+  --color-indigo-deep: #1a2151;
+  --color-cream: #f5ecdd;
+  --color-beige: #e6d7bd;
+  --color-rose: #d9a5a0;
+  --color-gold: #d8b675;
+  --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", "DM Sans", system-ui, sans-serif;
+  --font-hand: "Caveat", "Segoe Script", cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-night);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root { overflow-x: clip; }
+
+h1, h2, h3, .serif { font-family: var(--font-serif); font-weight: 400; letter-spacing: 0.01em; }
+
+:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 6px; }
+::selection { background: color-mix(in srgb, var(--color-gold) 40%, transparent); }
+
+/* ---------- reusable bits ---------- */
+.eyebrow { font-size: 0.7rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--color-gold); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  min-height: 48px; padding: .8rem 1.8rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 55%, transparent);
+  background: color-mix(in srgb, var(--color-gold) 10%, transparent);
+  color: var(--color-cream); font-family: var(--font-sans); font-size: .95rem; letter-spacing: .06em;
+  transition: background .4s, border-color .4s, box-shadow .4s;
+}
+.btn:hover { background: color-mix(in srgb, var(--color-gold) 20%, transparent); box-shadow: 0 0 40px -8px var(--color-gold); }
+
+.breathe { animation: breathe 3.6s ease-in-out infinite; }
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 18px -6px var(--color-gold); transform: scale(1); }
+  50% { box-shadow: 0 0 46px -4px var(--color-gold); transform: scale(1.035); }
+}
+
+.float { animation: float 7s ease-in-out infinite; }
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+
+.twinkle { animation: twinkle 4.5s ease-in-out infinite; }
+[data-music="on"] .twinkle { animation-duration: 2.2s; }
+@keyframes twinkle { 0%, 100% { opacity: .15; } 50% { opacity: .9; } }
+
+.cloud { animation: drift 60s linear infinite alternate; }
+@keyframes drift { from { translate: -6vw 0; } to { translate: 6vw 0; } }
+
+.bar { transform-origin: bottom; animation: bar 1.1s ease-in-out infinite; }
+@keyframes bar { 0%, 100% { transform: scaleY(.25); } 50% { transform: scaleY(1); } }
+
+.bounce-soft { animation: bounce-soft 2.4s ease-in-out infinite; }
+@keyframes bounce-soft { 0%, 100% { translate: 0 0; opacity: .5; } 50% { translate: 0 8px; opacity: 1; } }
+
+.paper {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(255,255,255,.55), transparent 60%),
+    linear-gradient(#f7efe0, #f1e6d1);
+  color: #2b2620;
+  box-shadow: 0 30px 80px -30px rgba(0,0,0,.7), inset 0 0 60px rgba(160,120,60,.12);
+}
+
+.polaroid { background: #f8f3e8; padding: 10px 10px 34px; box-shadow: 0 14px 30px -10px rgba(0,0,0,.6); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .breathe, .float, .twinkle, .cloud, .bar, .bounce-soft { animation: none !important; }
+}
+
+.shoot { position: absolute; width: 90px; height: 1px; background: linear-gradient(90deg, transparent, var(--color-cream)); opacity: 0; rotate: 30deg; animation: shoot 14s ease-in infinite; }
+@keyframes shoot { 0% { opacity: 0; translate: 0 0; } 2% { opacity: .9; } 8% { opacity: 0; translate: 260px 150px; } 100% { opacity: 0; translate: 260px 150px; } }
+.firefly { position: absolute; bottom: -10px; width: 5px; height: 5px; border-radius: 9999px; background: #ffd98f; box-shadow: 0 0 12px 3px rgba(255,200,110,.7); opacity: 0; animation: rise 12s ease-in infinite; }
+@keyframes rise { 0% { opacity: 0; translate: 0 0; } 15% { opacity: .9; } 100% { opacity: 0; translate: 30px -70svh; } }
+@media (prefers-reduced-motion: reduce) { .shoot, .firefly { animation: none !important; display: none; } }
